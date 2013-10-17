@@ -51,7 +51,7 @@ class <%= metadata.name %> (
   ) inherits <%= metadata.name %>::params {
 
 
-  # Input parameters validation
+  # Class variables validation and management
 
   validate_re($ensure, ['present','absent'], 'Valid values: present, absent.')
   validate_bool($service_enable)
@@ -60,9 +60,6 @@ class <%= metadata.name %> (
   if $config_file_options_hash { validate_hash($config_file_options_hash) }
   if $monitor_options_hash { validate_hash($monitor_options_hash) }
   if $firewall_options_hash { validate_hash($firewall_options_hash) }
-
-
-  # Calculation of variables used in the module
 
   $config_file_owner          = $<%= metadata.name %>::params::config_file_owner
   $config_file_group          = $<%= metadata.name %>::params::config_file_group
@@ -103,7 +100,7 @@ class <%= metadata.name %> (
   }
 
 
-  # Resources manage
+  # Resources managed
 
   if $<%= metadata.name %>::package_name {
     package { $<%= metadata.name %>::package_name:

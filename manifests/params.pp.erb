@@ -35,7 +35,7 @@ class <%= metadata.name %>::params {
   case $::osfamily {
     'Debian','RedHat','Amazon': { }
     default: {
-      fail("${::operatingsystem} not supported")
+      fail("${::operatingsystem} not supported. Review params.pp for extending support.")
     }
   }
 }
