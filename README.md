@@ -22,7 +22,7 @@ As we don't want to have our .git files and this README in our skeleton, we expo
 
     git clone https://github.com/stdmod/puppet-module-skeleton
     cd puppet-module-skeleton
-    find skeleton -type f | git checkout-index --stdin --force --prefix="$HOME/.puppet/var/puppet-module/" --
+    rsync -av --delete --exclude '.git' .  $HOME/.puppet/var/puppet-module/
 
 ## Usage
 
