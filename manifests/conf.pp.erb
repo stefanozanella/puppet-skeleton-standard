@@ -69,48 +69,14 @@ define <%= metadata.name %>::conf (
 
   include <%= metadata.name %>
 
-  $manage_path = $path ? {
-    undef   => "${<%= metadata.name %>::config_dir_path}/${name}",
-    default => $path,
-  }
-
-  $manage_content = $content ? {
-    undef   => $template ? {
-      undef => undef,
-      default => template($template),
-    },
-    default => $content,
-  }
-
-  $manage_mode = $mode ? {
-    undef   => $<%= metadata.name %>::config_file_mode,
-    default => $mode,
-  }
-
-  $manage_owner = $owner ? {
-    undef   => $<%= metadata.name %>::config_file_owner,
-    default => $owner,
-  }
-
-  $manage_group = $group ? {
-    undef   => $<%= metadata.name %>::config_file_group,
-    default => $group,
-  }
-
-  $manage_require = $require ? {
-    undef   => $<%= metadata.name %>::config_file_require,
-    default => $require,
-  }
-
-  $manage_notify = $notify ? {
-    undef   => $<%= metadata.name %>::manage_config_file_notify,
-    default => $notify,
-  }
-
-  $manage_replace = $replace ? {
-    undef   => $<%= metadata.name %>::config_file_replace,
-    default => $replace,
-  }
+  $manage_path    = pickx($path, "${<%= metadata.name %>::config_dir_path}/${name}")
+  $manage_content = choose_default($content, $template)
+  $manage_mode    = pickx($mode, $<%= metadata.name %>::config_file_mode)
+  $manage_owner   = pickx($owner, $<%= metadata.name %>::config_file_owner)
+  $manage_group   = pickx($group, $<%= metadata.name %>::config_file_group)
+  $manage_require = pickx($require, $<%= metadata.name %>::config_file_require)
+  $manage_notify  = pickx($notify, $<%= metadata.name %>::manage_config_file_notify)
+  $manage_replace = pickx($replace, $<%= metadata.name %>::config_file_replace)
 
   file { "<%= metadata.name %>_conf_${name}":
     ensure  => $ensure,
