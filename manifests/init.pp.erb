@@ -65,27 +65,10 @@ class <%= metadata.name %> (
   $config_file_group          = $<%= metadata.name %>::params::config_file_group
   $config_file_mode           = $<%= metadata.name %>::params::config_file_mode
 
-  if $config_file_content {
-    $manage_config_file_content = $config_file_content
-  } else {
-    if $config_file_template {
-      $manage_config_file_content = template($config_file_template)
-    } else {
-      $manage_config_file_content = undef
-    }
-  }
+  $manage_config_file_content = default_content($config_file_content, $config_file_template)
 
-  if $config_file_notify {
-    $manage_config_file_notify = $config_file_notify
-  } else {
-    $manage_config_file_notify = undef
-  }
-
-  if $version {
-    $manage_package_ensure = $version
-  } else {
-    $manage_package_ensure = $ensure
-  }
+  $manage_config_file_notify = pickx($config_file_notify)
+  $manage_package_ensure = pickx($version, $ensure)
 
   if $ensure == 'absent' {
     $manage_service_enable = undef
