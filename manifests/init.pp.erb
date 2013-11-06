@@ -11,10 +11,8 @@
 #
 class <%= metadata.name %> (
 
-  $ensure                    = 'present',
-  $version                   = undef,
-
   $package_name              = $<%= metadata.name %>::params::package_name,
+  $package_ensure            = 'present',
 
   $service_name              = $<%= metadata.name %>::params::service_name,
   $service_ensure            = 'running',
@@ -53,7 +51,6 @@ class <%= metadata.name %> (
 
   # Class variables validation and management
 
-  validate_re($ensure, ['present','absent'], 'Valid values: present, absent.')
   validate_bool($service_enable)
   validate_bool($config_dir_recurse)
   validate_bool($config_dir_purge)
@@ -68,9 +65,8 @@ class <%= metadata.name %> (
   $manage_config_file_content = default_content($config_file_content, $config_file_template)
 
   $manage_config_file_notify = pickx($config_file_notify)
-  $manage_package_ensure = pickx($version, $ensure)
 
-  if $ensure == 'absent' {
+  if $package_ensure == 'absent' {
     $manage_service_enable = undef
     $manage_service_ensure = stopped
     $config_dir_ensure = absent
@@ -87,7 +83,7 @@ class <%= metadata.name %> (
 
   if $<%= metadata.name %>::package_name {
     package { $<%= metadata.name %>::package_name:
-      ensure   => $<%= metadata.name %>::manage_package_ensure,
+      ensure   => $<%= metadata.name %>::package_ensure,
     }
   }
 
