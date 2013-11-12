@@ -102,6 +102,12 @@ The module provides also a generic define to manage any <%= metadata.name %> con
           config_dir_recursion => false, # Default: true.
         }
 
+* Do not trigger a service restart when a config file changes.
+
+        class { '<%= metadata.name %>':
+          config_dir_notify => '', # Default: Service[<%= metadata.name %>]
+        }
+
 
 ##Operating Systems Support
 
