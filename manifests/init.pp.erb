@@ -83,20 +83,19 @@ class <%= metadata.name %> (
   }
 
 
+  # Dependency class
+
+  if $<%= metadata.name %>::dependency_class {
+    include $<%= metadata.name %>::dependency_class
+  }
+
+
   # Resources managed
 
   if $<%= metadata.name %>::package_name {
     package { '<%= metadata.name %>':
       ensure   => $<%= metadata.name %>::package_ensure,
       name     => $<%= metadata.name %>::package_name,
-    }
-  }
-
-  if $<%= metadata.name %>::service_name {
-    service { '<%= metadata.name %>':
-      ensure     => $<%= metadata.name %>::manage_service_ensure,
-      name       => $<%= metadata.name %>::service_name,
-      enable     => $<%= metadata.name %>::manage_service_enable,
     }
   }
 
@@ -127,12 +126,16 @@ class <%= metadata.name %> (
     }
   }
 
+  if $<%= metadata.name %>::service_name {
+    service { '<%= metadata.name %>':
+      ensure     => $<%= metadata.name %>::manage_service_ensure,
+      name       => $<%= metadata.name %>::service_name,
+      enable     => $<%= metadata.name %>::manage_service_enable,
+    }
+  }
+
 
   # Extra classes
-
-  if $<%= metadata.name %>::dependency_class {
-    include $<%= metadata.name %>::dependency_class
-  }
 
   if $<%= metadata.name %>::my_class {
     include $<%= metadata.name %>::my_class
