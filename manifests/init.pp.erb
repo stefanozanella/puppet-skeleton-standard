@@ -21,7 +21,6 @@ class <%= metadata.name %> (
   $config_file_path          = $<%= metadata.name %>::params::config_file_path,
   $config_file_require       = 'Package[<%= metadata.name %>]',
   $config_file_notify        = 'Service[<%= metadata.name %>]',
-  $config_file_replace       = undef,
   $config_file_source        = undef,
   $config_file_template      = undef,
   $config_file_content       = undef,
