@@ -143,7 +143,7 @@ class <%= metadata.name %> (
   if $<%= metadata.name %>::monitor_class {
     class { $<%= metadata.name %>::monitor_class:
       options_hash => $<%= metadata.name %>::monitor_options_hash,
-      scope_hash   => {}, # TODO: Find a good way to inject class' scope
+      scope_hash   => {}, # TODO: Find a good way to inject class' scope
     }
   }
 
