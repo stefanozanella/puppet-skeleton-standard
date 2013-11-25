@@ -102,6 +102,19 @@ The module provides also a generic define to manage any <%= metadata.name %> con
           config_dir_recursion => false, # Default: true.
         }
 
+* Provide an hash of files resources to be created with <%= metadata.name %>::conf.
+
+        class { '<%= metadata.name %>':
+          conf_hash => {
+            '<%= metadata.name %>.conf' => {
+              template => 'site/<%= metadata.name %>/<%= metadata.name %>.conf',
+            },
+            '<%= metadata.name %>.other.conf' => {
+              template => 'site/<%= metadata.name %>/<%= metadata.name %>.other.conf',
+            },
+          },
+        }
+
 * Do not trigger a service restart when a config file changes.
 
         class { '<%= metadata.name %>':
