@@ -16,6 +16,7 @@
 
 This module installs, manages and configures <%= metadata.name %>.
 
+
 ##Module Description
 
 The module is based on **stdmod** naming standards version 0.9.0.
@@ -33,7 +34,8 @@ Refer to http://github.com/stdmod/ for complete documentation on the common para
 ###Setup Requirements
 * PuppetLabs [stdlib module](https://github.com/puppetlabs/puppetlabs-stdlib)
 * StdMod [stdmod module](https://github.com/stdmod/stdmod)
-* Puppet version >= 2.7.x
+* Ripieenar [module_data](https://github.com/ripienaar/puppet-module-data)
+* Puppet version >= 3.x
 * Facter version >= 1.6.2
 
 ###Beginning with module <%= metadata.name %>
@@ -42,7 +44,12 @@ To install the package provided by the module just include it:
 
         include <%= metadata.name %>
 
-The main class arguments can be provided either via Hiera (from Puppet 3.x) or direct parameters:
+Class arguments can be provided either via Hiera (from Puppet 3.x). Sample .yaml backend:
+
+        ---
+        <%= metadata.name %>::parameter: 'value'
+
+Or using parametrized class declaration:
 
         class { '<%= metadata.name %>':
           parameter => value,
@@ -118,8 +125,11 @@ The module provides also a generic define to manage any <%= metadata.name %> con
 * Do not trigger a service restart when a config file changes.
 
         class { '<%= metadata.name %>':
-          config_dir_notify => '', # Default: Service[<%= metadata.name %>]
+          config_file_notify => '', # Default: Service[<%= metadata.name %>]
         }
+
+* Modules' internal data to manage different OS names can be overridded.
+  Check data/common.yaml and the hierarchy defined in data/hiera.yaml for sample Hiera settings 
 
 
 ##Operating Systems Support
