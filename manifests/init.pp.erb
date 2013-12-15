@@ -109,7 +109,7 @@ class <%= metadata.name %> (
     package { $<%= metadata.name %>::package_name:
       ensure   => $<%= metadata.name %>::package_ensure,
       name     => $<%= metadata.name %>::package_name,
-      alias    => '$<%= metadata.name %>',
+      alias    => '<%= metadata.name %>',
     }
   }
 
