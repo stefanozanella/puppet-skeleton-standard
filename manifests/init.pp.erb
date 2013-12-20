@@ -129,9 +129,9 @@ class <%= metadata.name %> (
 
   if $<%= metadata.name %>::service_name {
     service { '<%= metadata.name %>':
-      ensure     => $<%= metadata.name %>::manage_service_ensure,
-      name       => $<%= metadata.name %>::service_name,
-      enable     => $<%= metadata.name %>::manage_service_enable,
+      ensure => $<%= metadata.name %>::manage_service_ensure,
+      name   => $<%= metadata.name %>::service_name,
+      enable => $<%= metadata.name %>::manage_service_enable,
     }
   }
 
