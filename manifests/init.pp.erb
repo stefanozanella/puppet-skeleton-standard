@@ -70,14 +70,14 @@ class <%= metadata.name %> (
 
   if $package_ensure == 'absent' {
     $manage_service_enable = undef
-    $manage_service_ensure = stopped
-    $config_dir_ensure = absent
-    $config_file_ensure = absent
+    $manage_service_ensure = 'stopped'
+    $config_dir_ensure     = 'absent'
+    $config_file_ensure    = 'absent'
   } else {
     $manage_service_enable = $service_enable
     $manage_service_ensure = $service_ensure
-    $config_dir_ensure = directory
-    $config_file_ensure = present
+    $config_dir_ensure     = 'directory'
+    $config_file_ensure    = 'present'
   }
 
   # Dependency class
