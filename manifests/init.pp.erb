@@ -89,8 +89,8 @@ class <%= metadata.name %> (
   # Resources managed
   if $<%= metadata.name %>::package_name {
     package { '<%= metadata.name %>':
-      ensure   => $<%= metadata.name %>::package_ensure,
-      name     => $<%= metadata.name %>::package_name,
+      ensure => $<%= metadata.name %>::package_ensure,
+      name   => $<%= metadata.name %>::package_name,
     }
   }
 
