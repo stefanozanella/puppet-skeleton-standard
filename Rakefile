@@ -17,6 +17,11 @@ exclude_paths = [
 PuppetLint.configuration.ignore_paths = exclude_paths
 PuppetSyntax.exclude_paths = exclude_paths
 
+desc "Run system-level acceptance tests."
+RSpec::Core::RakeTask.new(:acceptance) do |t|
+  t.pattern = 'spec/acceptance/**/*_spec.rb'
+end
+
 desc "Run syntax, lint, and spec tests."
 task :test => [
   :syntax,

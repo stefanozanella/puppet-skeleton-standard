@@ -1,0 +1,12 @@
+require 'beaker-rspec'
+
+RSpec.configure do |c|
+  proj_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+
+  c.formatter = :documentation
+
+  c.before :suite do
+    install_puppet
+    puppet_module_install(:source => proj_root, :module_name => '<%= metadata.name %>')
+  end
+end
