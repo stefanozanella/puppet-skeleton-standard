@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'puppet-lint'
-gem 'beaker'
-gem 'beaker-rspec'
 gem 'puppetlabs_spec_helper'
 gem 'travis'
 gem 'travis-lint'
